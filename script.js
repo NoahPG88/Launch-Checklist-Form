@@ -1,7 +1,4 @@
 // Write your JavaScript code here!
-function clearInp(){
-   document.getElementsByTagName("input").value = "";
-}
 
 window.addEventListener("load", function(){
 
@@ -30,10 +27,35 @@ window.addEventListener("load", function(){
          event.preventDefault();
       }
 
-   event.preventDefault();
 
+      let launchStatusH2 = document.getElementById("launchStatus");
+      let faultyItemsDiv = document.getElementById("faultyItems");
+      let pilotStatusLi = document.getElementById("pilotStatus");
+      let copilotStatusLi = document.getElementById("copilotStatus");
+      let fuelStatusLi = document.getElementById("fuelStatus");
+      let cargoStatusLi = document.getElementById("cargoStatus");
+   
+      //Changeing the LI
+      pilotStatusLi.innerHTML = `Pilot ${pilotNameInput} Ready`;
+      copilotStatusLi.innerHTML = `Copilot ${copilotNameInput} Ready`;
+
+      if(fuelLevelInput < 10000){
+         faultyItemsDiv.style.visibility = "visible";
+         fuelStatusLi.innerHTML = "Insufficient fuel"
+         launchStatusH2.innerHTML = "Shuttle not ready for launch";
+         launchStatusH2.style.color = "red";
+      } else if (cargoMassInput > 10000){
+         faultyItemsDiv.style.visibility = "visible";
+         cargoStatusLi.innerHTML = "Excessive cargo mass";
+         launchStatusH2.innerHTML = "Shuttle not ready for launch";
+         launchStatusH2.style.color = "red";
+      } else{
+         launchStatusH2.innerHTML = "Shuttle is ready for launch";
+         launchStatusH2.style.color = "green";
+      }
+
+      event.preventDefault();
    });
-
 });
 
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
